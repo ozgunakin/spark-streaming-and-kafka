@@ -1,4 +1,4 @@
 # Table of contents
 
-* [Spark Streaming and Kafka Integration](README.md)
+* [Initial page](README.md)
 
