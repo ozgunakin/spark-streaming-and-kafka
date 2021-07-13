@@ -8,7 +8,13 @@ This is project includes a streaming data pipeline established using apache Kafk
 
 ## Step 1 - Download Proper Dependencies
 
-External jar files should be downloaded to integrate Kafka and Spark. Versions of Kafka and Spark should be known for searching and downloading the right jar files. If the wrong files are downloaded, integrations will be failed. In this project, Spark ... and Kafka ... were used. You can find proper jar files in this repository for the integration of mentioned versions. For further information, you can visit; [https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html](https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html)
+External jar files should be downloaded to integrate Kafka and Spark. Versions of Kafka and Spark should be known for searching and downloading the right jar files. If the wrong files are downloaded, integrations will be failed. In this project, Spark-2.4.7 and Kafka-2.1.1 were used. You can find proper jar files in this repository for the integration of mentioned versions. For further information, you can visit; [https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html](https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html)
+
+* [x] Download **spark-sql-kafka** jar for structured streaming from maven repository: [https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10\_2.12/2.4.7](https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10_2.12/2.4.7)
+* [x] Download **kafka-clients** jar for structured streaming from maven repository: [https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients/2.1.1](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients/2.1.1)
+* [x] Download **spark-streaming-kafka** jar from maven repository : [https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10\_2.11/2.4.7](https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10_2.11/2.4.7)
+
+
 
 
 
