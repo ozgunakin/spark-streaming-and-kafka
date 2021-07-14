@@ -94,3 +94,7 @@ query.awaitTermination()
 spark-submit --verbose --master local --jars /home/ubuntu/jars/spark-sql-kafka-0-10_2.11-2.4.7.jar,/home/ubuntu/jars/spark-streaming-kafka-0-10_2.11-2.4.7.jar,/home/ubuntu/jars/kafka-clients-2.1.1.jar /home/ubuntu/spark-code/spark-streaming.py
 ```
 
+## Conclusion
+
+Congratulations !! You have successfully integrated Kafka and Spark Streaming. 
+
