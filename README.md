@@ -1,6 +1,6 @@
 # Spark Streaming and Kafka Integration
 
-This is project includes a streaming data pipeline established using apache Kafka and Spark. Data will be sent to the HDFS after processed by spark streaming.
+This is project includes a streaming data pipeline established using apache Kafka and Spark. Data will be sent to the HDFS after processed by spark streaming. It is assumed that there is continuous data flow from Twitter to Kafka.
 
 ## Architecture
 
@@ -18,7 +18,7 @@ You can put these files into a directory you select. Note the directory path to 
 
 ## Step 2 - Prepare Additional Directories
 
-Spark streaming application needs two additional directories. One of these will be used to store metadata and checkpoint files will be stored in the second one. Before run Spark Streaming code, you need to set up these directories and adjust proper permissions.
+Spark streaming application needs spesific dire One of these will be used to store metadata and checkpoint files will be stored in the second one. Before run Spark Streaming code, you need to set up these directories and adjust proper permissions.
 
 * [x] Create a project directory and go inside the directory.
 
@@ -27,16 +27,62 @@ sudo mkdir my-streaming-project
 cd my-streaming-project
 ```
 
-* [x] Create checkpoint and metadata directories inside the project directory.
+* [x] Create a checkpoint directory inside the project directory.
 
 ```text
 sudo mkdir checkpoint
-sudo mkdir metadata
 ```
 
 ## Step 3 - Prepare Spark Streaming Code
 
+This code reads tweets from a Kafka topic and saves these data to HDFS.
 
+```text
+import pyspark.sql.functions as F
+frompyspark.sql import SparkSession
+frompyspark.streaming import StreamingContext
+frompyspark.sql.types import *
+frompyspark.sql.functionsimportfrom_json,col,to_json
+import pyspark
+frompyspark.sql.functionsimport col,
+when,regexp_replace,from_unixtime
+frompyspark.sql.functionsimportlit
+import datetime
+frompyspark.sql.functionsimport year, month, dayofmonth,hour
+
+spark = SparkSession.builder\
+.master("local")\
+.appName("streamingAppOzgun")\
+.config("spark.driver.cores", 1)\
+.config("spark.executor.cores", 1)\
+.config("spark.executor.memory", "1g")\
+.config("spark.driver.memory", "1g")\
+.config("spark.executor.instances", 1).getOrCreate()
+sc = spark.sparkContext
+
+schema=spark.read.json("/home/ubuntu/schema/twitterschema").schema
+print(schema)
+
+df = spark \
+.readStream\
+.format("kafka") \
+.option("kafka.bootstrap.servers", "localhost:9092") \
+.option("subscribe", "tweetTopicOzgun") \
+.option("failOnDataLoss","false")\
+.load() \
+.select(from_json(col("value").cast("string"), schema).alias("opc"))
+df=df.select("opc.*")
+df.printSchema()
+
+query = df\
+.writeStream\
+.format("parquet") \
+.option("checkpointLocation", "/home/ubuntu/my-streaming-project/checkpoint) \
+.option("path", "&HADOOP_FILE_PATH/streamingOutput") \
+.trigger(processingTime="10 seconds") \
+.start()
+query.awaitTermination()
+```
 
 
 
