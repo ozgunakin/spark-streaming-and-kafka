@@ -12,7 +12,27 @@ External jar files should be downloaded to integrate Kafka and Spark. Versions o
 
 * [x] Download **spark-sql-kafka** jar for structured streaming from maven repository: [https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10\_2.12/2.4.7](https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10_2.12/2.4.7)
 * [x] Download **kafka-clients** jar for structured streaming from maven repository: [https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients/2.1.1](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients/2.1.1)
-* [x] Download **spark-streaming-kafka** jar from maven repository : [https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10\_2.11/2.4.7](https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10_2.11/2.4.7)
+* [x] Download **spark-streaming-kafka** jar from maven repository: [https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10\_2.11/2.4.7](https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10_2.11/2.4.7)
+
+You can put these files into a directory you select. Note the directory path to use later !!!
+
+## Step 2 - Prepare Additional Directories
+
+Spark streaming application needs two additional directories. One of these will be used to store metadata and checkpoint files will be stored in the second one. Before run Spark Streaming code, you need to set up these directories and adjust proper permissions.
+
+* [x] Create a project directory and go inside the directory.
+
+```text
+sudo mkdir my-streaming-project
+cd my-streaming-project
+```
+
+* [x] Create checkpoint and metadata directories inside the project directory.
+
+```text
+sudo mkdir checkpoint
+sudo mkdir metadata
+```
 
 
 
