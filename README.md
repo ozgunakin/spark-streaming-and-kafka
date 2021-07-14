@@ -35,9 +35,11 @@ sudo mkdir checkpoint
 
 ## Step 3 - Prepare Spark Streaming Code
 
-This code reads tweets from a Kafka topic and saves these data to HDFS.
+This pyspark code reads tweets from a Kafka topic and saves these data to HDFS.
 
-```text
+* [x] After preparing your spark streaming code, save it as **spark-streaming.py**
+
+```python
 import pyspark.sql.functions as F
 frompyspark.sql import SparkSession
 frompyspark.streaming import StreamingContext
@@ -67,7 +69,7 @@ df = spark \
 .readStream\
 .format("kafka") \
 .option("kafka.bootstrap.servers", "localhost:9092") \
-.option("subscribe", "tweetTopicOzgun") \
+.option("subscribe", "tweetTopic") \ #Kafka TopicName= tweetTopic
 .option("failOnDataLoss","false")\
 .load() \
 .select(from_json(col("value").cast("string"), schema).alias("opc"))
@@ -77,12 +79,18 @@ df.printSchema()
 query = df\
 .writeStream\
 .format("parquet") \
-.option("checkpointLocation", "/home/ubuntu/my-streaming-project/checkpoint) \
+.option("checkpointLocation", "/home/ubuntu/my-streaming-project/checkpoint") \
 .option("path", "&HADOOP_FILE_PATH/streamingOutput") \
 .trigger(processingTime="10 seconds") \
 .start()
 query.awaitTermination()
 ```
 
+## Step 4 - Submit Spark Streaming Code
 
+* [x] Run your streaming code on bash. Do not forget to add jar files you downloaded at step 1.
+
+```text
+spark-submit --verbose --master local --jars /home/ubuntu/jars/spark-sql-kafka-0-10_2.11-2.4.7.jar,/home/ubuntu/jars/spark-streaming-kafka-0-10_2.11-2.4.7.jar,/home/ubuntu/jars/kafka-clients-2.1.1.jar /home/ubuntu/spark-code/spark-streaming.py
+```
 
