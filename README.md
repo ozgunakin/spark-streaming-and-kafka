@@ -34,7 +34,7 @@ sudo mkdir checkpoint
 sudo mkdir metadata
 ```
 
-
+## Step 3 - Prepare Spark Streaming Code
 
 
 
